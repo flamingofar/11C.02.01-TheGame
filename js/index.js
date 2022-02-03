@@ -2,12 +2,11 @@
 const choiceBtns = document.querySelectorAll("button");
 const player1 = document.querySelector("#player1");
 const player2 = document.querySelector("#player2");
-let userChoice, computerChoice, winner, loser, tie;
+let userChoice, computerChoice, result;
 
 window.addEventListener("DOMContentLoaded", start);
 // Start Program
 function start() {
-	console.log("start");
 	setUserChoice();
 }
 
@@ -21,7 +20,6 @@ function setUserChoice() {
 function setUserChoiceHandler() {
 	start();
 
-	console.log(this.classList.value);
 	switch (this.classList.value) {
 		case "paper":
 			player1.classList = "";
@@ -86,44 +84,22 @@ function animationStart() {
 
 //Determine Winner
 function determineWinner() {
-	if (userChoice == "paper" && computerChoice == "rock") {
-		showWinner();
-		console.log("User Wins with paper");
-	} else if (userChoice == "paper" && computerChoice == "paper") {
-		showTie();
-		console.log("It's a tie with Paper");
-	} else if (userChoice == "paper" && computerChoice == "scissors") {
-		showLoser();
-		console.log("Computer Wins with Scissors");
-	} else if (userChoice == "scissors" && computerChoice == "rock") {
-		showLoser();
-		console.log("Computer Wins with Rock");
-	} else if (userChoice == "scissors" && computerChoice == "paper") {
-		showWinner();
-		console.log("User Wins with Scissors");
-	} else if (userChoice == "scissors" && computerChoice == "scissors") {
-		showTie();
-		console.log("It's a tie with Rock");
-	} else if (userChoice == "rock" && computerChoice == "paper") {
-		showLoser();
-		console.log("Computer Wins with Paper");
-	} else if (userChoice == "rock" && computerChoice == "scissors") {
-		showWinner();
-		console.log("User Wins with Rock");
-	} else if (userChoice == "rock" && computerChoice == "rock") {
-		showTie();
-		console.log("It's a tiewith Rock");
+	if (userChoice == computerChoice) {
+		result = "tie";
+	} else if (
+		(userChoice == "paper" && computerChoice == "rock") ||
+		(userChoice == "rock" && computerChoice == "scissors") ||
+		(userChoice == "scissors" && computerChoice == "paper")
+	) {
+		result = "win";
+	} else {
+		result = "lose";
 	}
+	showResult();
 }
 
-function showWinner() {
-	document.querySelector("#win").classList.remove("hidden");
-}
-function showLoser() {
-	document.querySelector("#lose").classList.remove("hidden");
-}
-function showTie() {
-	document.querySelector("#draw").classList.remove("hidden");
+function showResult() {
+	document.querySelector(`#${result}`).classList.remove("hidden");
 }
 
 //Helper functions
