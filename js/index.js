@@ -1,9 +1,10 @@
 /** @format */
-const choiceBtns = document.querySelectorAll("button");
+const choiceBtns = document.querySelectorAll("#buttons div:first-child button");
 const player1 = document.querySelector("#player1");
 const player2 = document.querySelector("#player2");
-let userChoice, computerChoice, result;
+const restartBtn = document.querySelector("#restart");
 
+let userChoice, computerChoice, result;
 window.addEventListener("DOMContentLoaded", start);
 // Start Program
 function start() {
@@ -19,12 +20,13 @@ function setUserChoice() {
 
 function setUserChoiceHandler() {
 	start();
-
+	console.log(this.classList.value);
 	switch (this.classList.value) {
 		case "paper":
 			player1.classList = "";
 			player1.classList.add("player", "paper");
 			userChoice = "paper";
+
 			break;
 		case "rock":
 			player1.classList = "";
@@ -40,7 +42,7 @@ function setUserChoiceHandler() {
 	choiceBtns.forEach((btn) => {
 		btn.removeEventListener("click", setUserChoiceHandler);
 	});
-
+	document.querySelector("#buttons").classList.add("disabled");
 	setComputerChoice();
 }
 
@@ -85,7 +87,7 @@ function animationStart() {
 //Determine Winner
 function determineWinner() {
 	if (userChoice == computerChoice) {
-		result = "tie";
+		result = "draw";
 	} else if (
 		(userChoice == "paper" && computerChoice == "rock") ||
 		(userChoice == "rock" && computerChoice == "scissors") ||
@@ -100,6 +102,18 @@ function determineWinner() {
 
 function showResult() {
 	document.querySelector(`#${result}`).classList.remove("hidden");
+	document.querySelector("#restart").classList.remove("hidden");
+	restartBtn.addEventListener("click", () => {
+		player1.classList = "";
+		player1.classList.add("player");
+		player2.classList = "";
+		player2.classList.add("player");
+
+		document.querySelector("#buttons").classList.remove("disabled");
+		document.querySelector(`#${result}`).classList.add("hidden");
+		result = "";
+		start();
+	});
 }
 
 //Helper functions
