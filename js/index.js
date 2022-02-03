@@ -101,19 +101,21 @@ function determineWinner() {
 }
 
 function showResult() {
+	console.log(result);
 	document.querySelector(`#${result}`).classList.remove("hidden");
 	document.querySelector("#restart").classList.remove("hidden");
-	restartBtn.addEventListener("click", () => {
-		player1.classList = "";
-		player1.classList.add("player");
-		player2.classList = "";
-		player2.classList.add("player");
-
-		document.querySelector("#buttons").classList.remove("disabled");
-		document.querySelector(`#${result}`).classList.add("hidden");
-		result = "";
-		start();
-	});
+	restartBtn.addEventListener("click", restart);
 }
 
 //Helper functions
+function restart() {
+	player1.classList = "";
+	player1.classList.add("player");
+	player2.classList = "";
+	player2.classList.add("player");
+
+	document.querySelector("#buttons").classList.remove("disabled");
+	document.querySelector(`#${result}`).classList.add("hidden");
+	result = "";
+	start();
+}

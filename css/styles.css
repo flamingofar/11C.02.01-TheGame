@@ -110,10 +110,6 @@ h1 {
 		-4px 4px 1px red;
 }
 
-.hidden {
-	display: none;
-}
-
 #buttons {
 	display: flex;
 	justify-content: space-around;
@@ -150,4 +146,7 @@ button.paper {
 
 button.scissors {
 	background-image: url(../assets/button_scissors.png);
+}
+.hidden {
+	display: none;
 }
